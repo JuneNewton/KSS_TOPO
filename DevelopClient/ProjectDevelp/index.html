@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>客户端开发系统</title>
+    <!-- 解决electron下jquery为undefined以及js类不识别的问题 -->
+    <script>if (typeof module === 'object') { module = undefined; } </script>
+    <!--定制化功能插件-->
+    <script type="text/javascript" src="./../../Plugins/shendong/shendong.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../DevelopClient/ProjectDevelp/css/KMUIdeveloplogin.css" />
+    <link rel="stylesheet" type="text/css" href="./../../ThirdParty/jquery-easyui-1.6.4/themes/default/easyui.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="./../../DevelopClient/ProjectDevelp/res/favicon/login_favicon.png" />
+    <script type="text/javascript" src="./../../ThirdParty/jquery-easyui-1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./../../ThirdParty/jquery-easyui-1.6.4/jquery.easyui.min.js"></script>
+    <!-- Outer Common JS file -->
+    <script type="text/javascript" src="./../../Common/km_util.js"></script>
+    <script type="text/javascript" src="./../../Common/kmui_object.js"></script>
+    <script type="text/javascript" src="./../../Common/kmui_element.js"></script>
+    <script type="text/javascript" src="./../../Common/km_singleton.js"></script>
+    <script type="text/javascript" src="./../../Common/km_factory.js"></script>
+    <script type="text/javascript" src="./../../Common/Graphic/Layout/kmui_componentbase.js"></script>
+    <script type="text/javascript" src="./../../Common/Graphic/Layout/kmui_layoutcomponentbase.js"></script>
+    <script type="text/javascript" src="./../../Common/Graphic/Layout/kmui_layout.js"></script>
+    <script type="text/javascript" src="./../../Common/kmui_devrunmng.js"></script>
+    <script tyoe="text/javascript" src="./../../Common/kmui_html.js"></script>
+
+    <!-- global Function JS file -->
+    <!-- <script type="text/javascript" src="./../../Common/ScriptFunction/dateTimeFunc.js"></script>
+    <script type="text/javascript" src="./../../Common/ScriptFunction/stringFunc.js"></script>
+    <script type="text/javascript" src="./../../Common/ScriptFunction/globalFunc.js"></script> -->
+
+    <!-- Inner Common JS file -->
+    <!-- <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/common/km_idmanage.js"></script> -->
+    <!-- Custom JS file -->
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/common/km_commonfunction.js"></script>
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/ui/kmui_zh_resource.js"></script>
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/ui/kmui_glabolvar.js"></script>
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/login/kmui_developloginlayout.js"></script>
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/login/kmui_initaldeveloplogin.js"></script>
+    <script type="text/javascript" src="./../../DevelopClient/ProjectDevelp/libs/login/kmui_developlogin.js"></script>
+    <script type="text/javascript" src="./../../Common/ScriptFunction/globalFunc.js"></script>
+    <script type="text/javascript" src="./../../Common/Communication/km_communication.js"></script>
+    <script type="text/javascript" src="./../../Common/ClientInterface/kmclient_km.js"></script>
+    <script type="text/javascript" src="./../../Common/ClientInterface/km_client_interface.js"></script>
+
+    <!-- 加密用 -->
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/jsbn.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/random.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/hash.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/rsa.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/aes.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/api.js"></script>
+	<script type="text/javascript" src="./../../ThirdParty/cryptico-master/cryptico.js"></script>
+    <script type="text/javascript" src="./../../ThirdParty/cryptico-master/cryptico.min.js"></script>
+    
+    <!-- add by ying.ye 20191025 shendong版 用户密码加密转码 -->
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/core.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/md5.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/enc-base64.js"></script>
+    
+</head>
+<body>
+</body>
+</html>

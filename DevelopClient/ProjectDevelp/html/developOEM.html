@@ -1,0 +1,806 @@
+<!--
+ * @File: develop.html
+ * @Description: 开发态首页
+ * @Author: zhijie.wang
+ * @Date: 2019-11-29 11:06:02
+ * @LastEditTime : 2021-06-25 09:36:09
+ * @LastEditors  : zhijie.wang
+ * @Version: 1.0.0
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>CYSuperSCADA 开发系统客户端</title>
+    <!-- 解决electron下jquery为undefined以及js类不识别的问题 -->
+    <script>if (typeof module === 'object') { module = undefined; }</script>
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/jquery-easyui-1.6.4/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/jquery-easyui-1.6.4/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/jquery-easyui-1.6.4/themes/color.css" />
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/jquery-easyui-1.6.4/demo/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUImenu.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUItoolbar.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIstatusbar.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIToolkit.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIdraggable.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIgraphic_view.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIpropertyGrid.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/spectrum.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/spectrum2.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIbrush.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIlayout.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIscripteditor.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMSEscriptEditor.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIdeveloptoolkit.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIchart.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIaewindow.css">
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMPropertyAssociation.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMCustomPropertyPopup.css" />
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/DatePicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIpopup.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIradio.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMValueInput.css" />
+
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIFont.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIDevelopTree.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIDevelopHeader.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIButton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIPageMng.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIUser.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KSLUIProjectItemManager.css" />
+    <link rel="stylesheet" type="text/css" href="../../../DevelopClient/ProjectDevelp/css/KMUIDevelopSystem.css" />
+
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/google-code-prettify/src/prettify.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../DevelopClient/ProjectDevelp/res/favicon/developsystem_favicon.png" />
+    <!-- add by han.zhang 引入fontawesome-->
+    <link rel="stylesheet" type="text/css" href="../../../ThirdParty/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- add by han.zhang 引入lodash -->
+    <script type="text/javascript" src="../../../ThirdParty/lodash/lodash.min.js"></script>
+    <!-- added by han.sun 用于生成id -->
+    <script type="text/javascript" src="../../../ThirdParty/shortid/js-shortid.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/jquery-easyui-1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/google-code-prettify/src/prettify.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/qrcode/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/qrcode/qrcode.js"></script>
+
+    <script type="text/javascript" src="../../../ThirdParty/jquery-easyui-1.6.4/jquery.easyui.all.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/easeljs/easeljs-0.8.2.combined.js"></script>
+    <!-- JS Grid file -->
+    <script type="text/javascript" src="./../../ThirdParty/babel-polyfill/polyfill.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/colorpicker/spectrum.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/colorpicker/spectrum2.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/colorpicker/kmui_brush.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/colorpicker/colorpickerEditor.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/checkbox.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/signals/Signal.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/signals/SignalBinding.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/signals/wrapper.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_doublylinkedlist.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_deque.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_size.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_vector.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_matrix.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_scaling_translation.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_transformation.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_stack.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/data_structure/km_singly-linked-list.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/script_editor_ace/ace.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/script_editor_ace/ext-language_tools.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/DatePicker/js/datepicker.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/treegrid-dnd.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/echarts.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/rgbcolor.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/stackblur.min.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/canvg.js"></script>
+
+    <script type="text/javascript" src="../../../ThirdParty/ht/configs/km_transform.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/configs/km_service.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/configs/buckle.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-animation.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-astar.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-autolayout.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-contextmenu.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-cssanimation.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-dashflow.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-dialog.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-edgetype.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-flow.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-forcelayout.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-form.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-historymanager.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-htmlnode.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-live.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-menu.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-modeling.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-obj.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-overview.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-palette.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-panel.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-propertypane.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-quickfinder.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-rulerframe.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-telecom.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-ui.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-vector.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-webview3d.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/ht/ht-xeditinteractor.js"></script>
+    <!-- add by ying.ye 20191025 shendong版 用户密码加密转码 -->
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/core.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/md5.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/crypto-js/src/enc-base64.js"></script>
+    <script type="text/javascript" src="../../../ThirdParty/websocket-heartbeat-js/dist/index.js"></script>
+
+    <!-- Outer Common JS file -->
+    <script type="text/javascript" src="../../../Common/km_util.js"></script>
+    <script type="text/javascript" src="../../../Common/kmui_object.js"></script>
+    <script type="text/javascript" src="../../../Common/kmui_element.js"></script>
+    <script type="text/javascript" src="../../../Common/km_lang_convert.js"></script>
+    <script type="text/javascript" src="../../../Common/km_singleton.js"></script>
+    <script type="text/javascript" src="../../../Common/km_factory.js"></script>
+    <script type="text/javascript" src="../../../Common/km_signal.js"></script>
+    <script type="text/javascript" src="../../../Common/km_console.js"></script>
+    <script type="text/javascript" src="../../../Common/kmui_devrunmng.js"></script>
+    <script type="text/javascript" src="../../../Common/kmui_html.js"></script>
+    <script type="text/javascript" src="../../../Common/km_manager_base.js"></script>
+    <!-- add by ying.ye 2019/06/18 -->
+    <link rel="stylesheet" type="text/css" href="../../../Common/Graphic/css/KMPopupBase.css" />
+    <script type="text/javascript" src="../../../Common/km_multiplegroup.js"></script>
+    <script type="text/javascript" src="../../../Common/km_popup_base.js"></script>
+    <!-- add by chaoru.yang 2019/09/30 bug 1309-->
+    <link rel="stylesheet" type="text/css" href="../../../Common/Graphic/css/KMAlarmBlink.css" />
+    <link rel="stylesheet" type="text/css" href="../../../Common/AuthLockExpiredInfo/kss_auth_lock_expired_time_show.css" />
+
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_popup_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_componentbase.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_layoutcomponentbase.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_accordion.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_tab.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_vertical_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_horizontal_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_grid_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_twodimensional_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_windiag_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_twodimensionalview.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_form_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_component_group.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_ht_layout/kmui_ht_layout.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_ht_layout/kmui_ht_layout_view.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_ht_3d_layout/kmui_ht_3d_layout_view.js">
+    </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Layout/kmui_ht_3d_layout/kmui_ht_3d_layout.js"></script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_auxiliary.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_axis_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_legend.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_series_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_title.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_tooltip.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_toolbox.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_grid.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_data_zoom.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_area_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/km_chart_component_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/kmcc_chart_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/TrendChart/kmcc_trendchart_series.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/TrendChart/kmcc_trendchart_axis.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/TrendChart/kmcc_trendchart_area.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/TrendChart/kmcc_trendchart.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/BarChart/kmcc_barchart_series.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/BarChart/kmcc_barchart_axis.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/BarChart/kmcc_barchart_area.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/BarChart/kmcc_barchart.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/PieChart/kmcc_piechart_series.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/PieChart/kmcc_piechart_area.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/PieChart/kmcc_piechart.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/XYChart/kmcc_xychart_series.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/XYChart/kmcc_xychart_axis.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/XYChart/kmcc_xychart_area.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/EChart/XYChart/kmcc_xychart.js"></script>
+
+    <!-- add by ying.ye 2019/7/9 -->
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/CustomCharts/kmui_customcharts_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/CustomCharts/ECharts/kmui_chart.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/CustomCharts/Reports/kmui_grid.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/CustomCharts/ECharts/km_chart_mng.js"></script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/Link/km_objectlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/km_link.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/km_linkmanager.js"> </script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_triggerlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_scripttrggerlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_mouselink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_modellink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_customizelink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_datachangelink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_inputlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_inputlinkdiscret.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_inputlinkstring.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_inputlinkanalog.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_uilink.js"> </script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_mouselinkleftdoubleclick.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_alarmevent.js"></script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_showinglink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_mouselinkleftmousepressed.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_mouselinkrightmousepressed.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/trigger/km_mouselinkover.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_expressionlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_textoutputlink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_textoutputlinkanalog.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_textoutputlinkdiscret.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_textoutputliskstring.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkscale.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkhorzscale.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkvertscale.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkshift.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkhorzshift.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkvertshift.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkorientation.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkrotation.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkblink.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkfillblink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkpenblink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkfillpercent.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkhorzfillpercent.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkvertfillpercent.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkenable.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkvisibility.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkshowhideblink.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkbrush.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinktextbrush.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinktextblink.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkpen.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkenable.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Link/Expression/km_displaylinkpipeflow.js"> </script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_graphic_base.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_select_manager.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_graphic_mng.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_graphic_group.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_canvas.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_percent_fill_style.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_line.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_polyline.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_spline_open.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_spline_close.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_bezier_open.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_bezier_close.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_bow.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_ellipse.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_rectangle.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_round_rectangle.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_arc.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_text.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_path.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_pie.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_polygon.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_pipe.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_image.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_dependitem.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_modeldepender.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_page_base.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_page_property.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_model_base.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_page.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/HTModel/km_graphic_ht.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/HTModel/km_htModel_event.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/HT3DModel/km_graphic_ht_3d.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/HT3DModel/km_ht_3d_model_variable_event.js">
+    </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/HTModel/km_htModel_variable_event.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/km_svg_convert.js"> </script>
+
+    <!-- add for web gis -->
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_tile.js"> </script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/Model/DataModel/km_datamodel_changelistener.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/DataModel/km_datamodel.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/DataModel/km_related_variable_item.js"> </script>
+    <!-- <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_value_object.js"> </script> -->
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_publicProperty.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_publicProperty_manager.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_related_variable_info.js"> </script>
+    <!-- <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_value_object_change_listener.js"> </script> -->
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicProperty/km_variable_subscribe_item.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_associateGraphic_model.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_compositeGraphic_model.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_graphic_model.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_layer.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_layermanager.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicEvent/km_publicEvent_manager.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicEvent/km_publicEvent.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicEvent/km_publicEventAssociate_manager.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/PublicEvent/km_publicEventAssociate.js"> </script>
+
+    <!-- add by ying.ye 2019/7/8 -->
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/CustomCharts/km_custom_charts.js"></script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_uibase.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_modelbase.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_richtext.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_calendar.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_combotree.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_switchbutton.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_sidemenu.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_tagbox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extdatebox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extvalidatebox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extpagination.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extdatetimebox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_exttree.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_exttreegird.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extfilebox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_exttooltip.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extdialog.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extwindows.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extmenubutton.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_extprogressbar.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_numberbox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_numberspinner.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_spinner.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_timespinner.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_time.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_textbox.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_scale.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_webcontainer.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_treeview.js"> </script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_button_model.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_combobox_model.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_combobox.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_validatebox.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_linkbutton.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_slider.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_datagrid.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_propergrid.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_textbox.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_ext_searchbox.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_checkbox_model.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_radio_model.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_list_model.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_horizontal_spacer.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/UI/kmui_vertical_spacer.js"></script>
+    <script type="text/javascript" src="../../../Common/SizePolicy/km_sizePolicy.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/km_variable_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/km_variable_value.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/km_variable_value_change_listenter.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/CustomProperty/km_custom_property_manager.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/CustomProperty/km_custom_property.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/CustomProperty/km_custom_property_link.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/LocalVariable/km_local_variable.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/LocalVariable/km_local_variable_manager.js"></script>
+    <!-- modify by ying.ye 2019/06/19 -->
+
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/AlarmWindow/km_alarmwindow.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/EventWindow/km_eventwindow.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindowfilter_editor.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_confirmremark_editor.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_statusbar.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_toolbar.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_title.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_tree.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_list.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_alarmwindow_list.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/AlarmWindow/km_alarmwindow_list.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/EventWindow/km_eventwindow_list.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewindow_datamanager.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/ChartComponent/AlarmEventWindow/km_aewinwoquery_editor.js"></script>
+
+    <script type="text/javascript" src="../../../Common/Graphic/TwoFlowChart/kmui_flowchart_base.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/TwoFlowChart/kmui_twodimensionalflowchart.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ksl_get_tree_data.js"></script>
+
+    <!-- Custom JS file -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_en_resource.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_zh_resource.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/km_commonfunction.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_glabolvar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/km_draggable.js"></script>
+    <script type="text/javascript" src="../../../Common/ScriptFunction/globalFunc.js"></script>
+    <script type="text/javascript" src="../../../Common/ScriptFunction/scriptfunction_ks.js"></script>
+    <script type="text/javascript" src="../../../Common/Communication/km_communication.js"></script>
+    <script type="text/javascript" src="../../../Common/ClientInterface/kmclient_km.js"></script>
+    <script type="text/javascript" src="../../../Common/ClientInterface/km_client_interface.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/km_idmanage.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/ksl_message_ui.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_radio_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_combobox_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_image_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_pen_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_docker.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_subdocker.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_property_association.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_event_association.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_custom_property_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_local_variable_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_datasource_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_submenu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_subtoolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_file_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_draw_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_edit_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_help_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/menu/kmui_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_immerse_roam_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_immerse_roam.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_path_roam.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_standard_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_draw_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_mousestatus_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_permutation_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_align_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_view_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_boundry_retract_toobar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_location_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/toolbar/kmui_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_tree.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_context_menu.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_output.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_ruler_grid.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_rulergrid_scale.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_property.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_layer.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_event.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/kmui_toolkit.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/kmui_multi_level_toolkit.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_auxiliaryarea.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_datamodel.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_localvariable.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_auxiliaryarea.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_datamodel.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_publicevent.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_aboutpopup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/statusbar/kmui_statusbar.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_commonproperty_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_commonevent_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_localvariable_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_customproperty.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_customproperty_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_import_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_compositegraphic_import_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_page_import_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_import_confirm_popup.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/kmui_editor_base.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/kmui_view_base.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/km_graphicmodemng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/kmui_uiscript_editor.js"></script>
+    <!-- developclient -->
+
+    <!-- 权限判断 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ksl_judge_project_authority.js"></script>
+    <!-- 采集工程组 -->
+
+    <!-- modify by ying.ye 2019/06/19 -->
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_basic_item.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_datasource_item.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_extend_field.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_group.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_group_mng.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/ProjectVariable/km_project_variable_manager.js"></script>
+    <script type="text/javascript" src="../../../Common/Variable/DatasourceVariable/km_datasource_variable_mng.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/kmui_develop_tree.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/kmui_develop_header.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/kmui_develop_system.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/kmui_custom_config.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/kmui_initialdevelop.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/pageManager/km_page_group.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/pageManager/km_page_info_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/pageManager/km_page_group_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/pageManager/km_page_info.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/pageManager/kmui_page_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/projectVariable/kmui_project_variable_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/projectVariable/kmui_quick_add_datasource_variable.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/datasourceManager/km_datasource.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/datasourceManager/km_datasource_connect_info.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/datasourceManager/km_datasource_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/datasourceManager/kmui_datasource_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/datasourceManager/ksl_datasource_tag_mng.js"></script>
+    <!--图形模型管理基类-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManagerBase/km_graphicModelInfoBase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManagerBase/km_graphicModelGroupBase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManagerBase/km_graphicModelMngBase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManagerBase/kmui_graphicModelMngBase.js"></script>
+    <!--图形模型管理-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManager/km_graphicModelMng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/graphicModelManager/graphicModelManager/kmui_graphicModelMng.js"></script>
+    <!--组合图素-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/compositeGraphicManager/kmui_compositegraphicconfigmangager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/compositeGraphicManager/kmui_svg_convert.js"></script>
+    <!--设置-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/fileMenuItem/km_system_config_mng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/fileMenuItem/kmui_system_settings.js"></script>
+
+
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/userManager/km_user_role_link.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/userManager/km_user.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_securitysection.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_role.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/kmui_authmanager.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/kmui_securitysection.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/userManager/kmui_user.js"></script> -->
+    <!-- 快速挂点弹窗 1021  start-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/kmui_quicklinkpopup.js"></script>
+    <!-- 快速挂点弹窗 1021  end -->
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/pageeditor/kmui_page_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/pageeditor/kmui_page_view.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/pageeditor/kmui_pagetoolkit.js"></script>
+
+    <!-- add for web gis -->
+    <script type="text/javascript" src="../../../Common/Graphic/FlowChart/km_tile_calc.js"></script>
+    <script type="text/javascript" src="../../../Common/Graphic/Model/km_2d_container_backprop.js"></script>
+
+    <!-- graphicmodeleditor -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/graphicmodeleditor/kmui_graphicmodeleditor_base.js"></script> -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/graphicmodeleditor/kmui_graphicmodel_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/graphicmodeleditor/kmui_graphicmodeltoolkit.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/hteditor/kmui_ht_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/hteditor/kmui_ht_view.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/hteditor/kmui_ht_toolkit.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/ht3deditor/kmui_ht_3d_editor.js">
+        </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/ht3deditor/kmui_ht_3d_toolkit.js">
+        </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/ht3deditor/kmui_ht_3d_view.js">
+    </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/graphicmodeleditor/kmui_graphic_view.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/km_graphicmodemng.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/km_name_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/chartscomponenteditor/kmui_customcharts_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/chartscomponenteditor/kmui_customcharts_view.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/chartscomponenteditor/kmui_customchartstoolkit.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/chartscomponenteditor/kmui_option_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/2dprocessflowcharteditor/kmui_2Dflowchart_view.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/2dprocessflowcharteditor/kmui_2Dflowchart_editor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/2dprocessflowcharteditor/kmui_2Dflowchart_toolkit.js"></script>
+    <!-- scripteditor -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_scriptfunconfig.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmse_toolbar.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmse_connect.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_scripteditor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmse_assistarea.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmui_model_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_keyword.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurebase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configbasicbase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_basicsingle.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_basicpipeflow.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_basiccompositeflow.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurefill.js"></script>
+    <!-- 0725 fan.wang  -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configpropertybase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurepenproperty.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurebrushproperty.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configuretextbrushproperty.js"></script>
+    <!-- 0725 fan.wang  end-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurezoom.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configuremove.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configrotatebase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_rotateself.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_rotatecenter.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmui_scripteditor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/kmui_ht_scripteditor.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_rotate_axis_3d.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_rotateself_3d.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valueinput.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_variableselector.js"></script>
+    <!-- 閼存碍婀扮紓鏍槯閿燂拷? 閻滃鍤?712-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurevaloutbase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valoutdiscrete.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valoutimitate.js"></script>
+    <!-- // 0726 fan.wang -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valoutstring.js"></script>
+    <!-- // 0726 fan.wang end -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configurevalinputbase.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valinputdiscrete.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valinputanalog.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_valinputstring.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/editor/scripteditor/km_configuretwinkle.js"></script>
+
+    <!-- 閼存碍婀扮紓鏍槯閿燂拷? 閻滃鍤?712 -->
+    <!-- controls -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_shortcut_key.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_object_ctrol_base.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_shortcut_key.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_graphic_control_base.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_graphicmodel_control.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_handler.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_lock_handler.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_rotate_handler.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_size_handler.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_point_handler.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_point_controller.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_line_controller.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_rect_controller.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_object_control_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_operator_factory.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_operator.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_align_operate.js"></script>
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_object_control_manager.js"></script> -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_component_control.js"></script> -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/controls/km_component_control.js"></script>
+    <!-- commands -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeproperty_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_add_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_remove_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changesize_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_move_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changebrush_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changepen_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changepipe_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changetable_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeconfiginfo_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_group_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_ungroup_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_lock_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_unlock_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_align_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_permute_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeimg_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_publicproperty_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_addevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_removeevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_modifyevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_easyui_setproperty_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/km_action_manager.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_addVarGrid_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_delVarGrid_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeVarGrid_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeradioitem_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_modifyDataModel_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changepublicevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_addpublicevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_delpublicevent_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_changeIndex_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_modifyConfigCheck_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/commands/km_minmax_action.js"> </script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/popupWidget/kmui_tilefilepopup.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/popupWidget/kmui_collectiongraphicgrouppopup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/popupWidget/kmui_geography_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/ui/popupWidget/kmui_exit_popup.js"></script>
+
+    <script type="text/javascript" src="../../../Common/ClientInterface/kmclient_serviceOPCUA.js"></script>
+    <script type="text/javascript" src="../../../Common/ClientInterface/kmclient_servicekio.js"></script>
+    <script type="text/javascript" src="../../../Common/ClientInterface/kmclient_serviceks351.js"></script>
+    <script type="text/javascript" src="../../../Common/ClientInterface/kmclient_servicekh351.js"></script>
+
+    <!-- added by han.sun 变量、变量组、报警组 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_tag.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_tag_group.js"></script>
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/alarm_group/ksl_alarm_group.js"></script> -->
+    <!-- added by han.sun 用户、用户组 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_group/ksl_user.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_group/ksl_user_group.js"></script>
+    <!-- 用户、用户组UI  added by zhijie.wang  2019-11-30 15:41:41-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_group/ksl_user_mng_ui.js"></script>
+    <!-- 变量列表UI  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_tag_list_ui.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_tag_attr_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_referenced_tag_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/ksl_alarm_tag_import_res_popup.js"></script>
+    <!-- 报警组UI  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/alarm_group/ksl_alarm_group_ui.js"></script> -->
+    <!--变量选择弹窗-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/ksl_tag_selector_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/tag_group/kss_associated_tag_popup.js"></script>
+    <!-- 主配置_脚本管理UI  added by zhijie.wang  2020年6月8日17:03:48 -->
+    <!--<script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/script_manager/common/KFCommunication_public.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/script_manager/common/KFNetwork_public.js"></script>-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/script_manager/ksl_script_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/script_manager/ksl_script_manager_ui.js"></script>
+
+    <!--脚本计算工程管理UI added by zhijie.wang  2020年6月28日10:20:05 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CalculationProjectGroup/ksl_calculation_project_group.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CalculationProjectGroup/ksl_calculation_project_group_ui.js"></script>
+
+
+    <!-- added by han.sun 主配置工程 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/ksl_main_config_project.js"></script>
+    <!-- added by han.sun 报警项 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/AlarmProjectGroup/ksl_alarm_item.js"></script>
+    <!-- added by han.sun 报警工程管理 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/AlarmProjectGroup/ksl_alarm_project.js"></script>
+    <!-- 报警工程组  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/AlarmProjectGroup/ksl_alarm_project_group_ui.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/AlarmProjectGroup/ksl_alarm_item_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/AlarmProjectGroup/ksl_alarm_item_tag_selector_popup.js"></script>
+
+    <!-- added by han.sun 采集组 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_collect_group.js"></script>
+    <!-- added by han.sun 采集工程管理 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_collect_project.js"></script>
+    <!-- 采集工程相关UI  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_collect_project_group_ui.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_associate_tag_select_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_quick_add_item.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/CollectProjectGroup/ksl_collect_tag_selector_popup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/deviceManager/ksl_device_mng_ui.js"></script>
+    <!-- added by han.sun 客户端工程管理 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/ksl_client_project.js"></script>
+    <!-- added by han.sun KP工程转换 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ProjectConvert/ksl_kp_project_convert.js"></script>
+    <!-- added by han.sun 工程部署 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ProjectDeloy/ksl_project_deploy.js"></script>
+    <!-- 工程部署  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/ksl_client_porject_group_ui.js"></script>
+    <!--added by zhen.ma  system  user   auth-->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/auth_manager/ksl_role.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/auth_manager/ksl_role_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/auth_manager/ksl_securityzone.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/auth_manager/ksl_securityzone_manager.js"></script>
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_dbsetting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_storage_setting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_dm_dbsetting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_history_dbconnectinfo.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_history_dbsetting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_realtime_dbconnectinfo.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_realtime_dbsetting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_system_checker.js"></script> -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_database_connect_info.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_db_storage_setting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_storage_param_setting.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_realtime_history_db_manger.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_inner_emq_db_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_system_setting_manager.js"></script>
+    <!-- 系统设置——报警/事件库设置  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_alarm_event_ui.js"></script>
+    <!-- 系统设置——实时/历史库设置  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_real_history_ui.js"></script>
+    <!-- 内部emq设置  added by zhijie.wang  2019-11-30 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_inner_emq_setting_ui.js"></script>
+    <!-- 双机冗余设置  added by zhen.ma  2021-06-08 15:41:41 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_dual_redundancy.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/system_setting_manager/ksl_dual_redundancy_setting_ui.js"></script>
+
+    <!-- modified by zhijie.wang 2019-12-2 15:44:55 -->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_manager/ksl_user.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_manager/ksl_user_manager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_manager/ksl_usergroup.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/user_manager/ksl_usergroup_manager.js"></script> -->
+    <!--added by zhen.ma-->
+    <!-- <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/userManager/km_user.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/userManager/km_user_role_link.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/userManager/kmui_user.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_securitysection.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_role.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/kmui_authmanager.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/kmui_securitysection.js"></script> -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/ksl_authmanager_ui.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/MainConfigProject/userManager/km_user_role_link.js"></script>
+
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_securitysection.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/km_role.js"></script>
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/developclient/ClientProjectGroup/authManager/kmui_securitysection.js"></script>
+
+    <!-- added by han.sun 页面变量统计管理 -->
+    <script type="text/javascript" src="../../../DevelopClient/ProjectDevelp/libs/common/SubcribeVarsManager/ksl_subcribe_vars_manager.js"></script>
+    <!-- added by pandeng.wang 精准订阅接口类 -->
+    <script type="text/javascript" src="../../../Common//Graphic/Model/km_precise_subscribe.js"></script>
+    <!-- added by zhijie.wang 注册运维代理弹窗类 -->
+    <script src="../../../DevelopClient/ProjectDevelp/libs/developclient/RegisteProToOpsProxy/registe_info_mng.js"></script>
+    <script src="../../../DevelopClient/ProjectDevelp/libs/developclient/RegisteProToOpsProxy/registe_popup.js"></script>
+    <script src="../../../Common/AuthLockExpiredInfo/kss_auth_lock_expired_time_show.js"></script>
+    <!-- end -->
+</head>
+
+<body>
+</body>
+
+</html>

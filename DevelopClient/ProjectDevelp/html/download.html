@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .img-download {
+            width: 170px;
+            height: 130px;
+            margin-bottom: 20px;
+            user-select: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+
+        p {
+            user-select: none;
+        }
+
+        .download {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <img class="img-download" src="../res/images/download.png" alt="">
+        <p>工程打包中，请稍后...</p>
+        <a href="" class="download">download</a>
+    </div>
+    <script>
+        let download = document.querySelector(".download")
+        window.onload = function () {
+            document.cookie = "exportToken=false;"
+            let url = window.location.href.slice(0, window.location.href.lastIndexOf("/")) + "/file/downloadProject"
+            download.href = url;
+            download.addEventListener("click", () => {
+                setInterval(() => {
+                    cookieListen();
+                }, 100);
+            })
+            //注册点击事件
+            let event = document.createEvent("MouseEvents");
+            event.initEvent("click", "false", "true");
+            //触发点击事件
+            download.dispatchEvent(event);
+        }
+        //获取cookie
+        function getCookie(name) {
+            var reg = RegExp(name + '=([^;]+)');
+            var arr = document.cookie.match(reg);
+            if (arr) {
+                return arr[1];
+            } else {
+                return '';
+            }
+        }
+        //设置cookie
+        setCookie = function (name, msg, day) {
+            var date = new Date();
+            date.setDate(date.getDate() + day);
+            document.cookie = name + "=" + msg + ';expires=' + date;
+        }
+        //监听cookie
+        function cookieListen() {
+            if (getCookie("exportToken") === "true") {
+                window.close();
+            }
+        }
+    </script>
+</body>
+
+</html>
